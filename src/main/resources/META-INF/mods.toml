@@ -1,0 +1,48 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="MIT"
+issueTrackerURL="https://discord.gg/C9MrEenQ"
+[[mods]] #mandatory
+modId="tetra_tables" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="Tetra tables in your favorite wood type" #mandatory
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+#logoFile="logo.png" #optional
+#credits="Thanks for this example mod goes to Java" #optional
+authors="MoonFather" #optional
+description='''
+Mod name just says it all.
+Tetra workbenches in birch or spruce. Or a whole bunch of mod-added wood.
+
+To obtain them, just whack a table with a hammer and get a nice looking workbench. Therefore, this mod REQUIRES a mod that adds variant crafting tables. Obvious choice is Workshop for handsome adventurer, but a few others like Oh the biomes you'll go will work too.
+'''
+
+[[dependencies.tetra_tables]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[40,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.tetra_tables]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.tetra_tables]]
+    modId="tetra"
+    mandatory=true
+    versionRange="[4.10.1, )"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.tetra_tables]]
+    modId="workshop_for_handsome_adventurer"
+    mandatory=false
+    versionRange="[1.08b, )"
+    ordering="NONE"
+    side="BOTH"
+

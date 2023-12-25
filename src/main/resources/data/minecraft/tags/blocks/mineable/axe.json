@@ -1,0 +1,13 @@
+{
+	"replace": false,
+	"values": [
+		"tetra_tables:tetra_table_oak",
+		"tetra_tables:tetra_table_spruce",
+		"tetra_tables:tetra_table_jungle",
+		"tetra_tables:tetra_table_birch",
+		"tetra_tables:tetra_table_dark_oak",
+		"tetra_tables:tetra_table_acacia",
+		"tetra_tables:tetra_table_crimson",
+		"tetra_tables:tetra_table_warped"
+	]
+}
