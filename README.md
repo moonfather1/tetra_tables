@@ -1,2 +1,2 @@
 # tetra_tables
-Tetra tables in multiple wood variants, inclufin 3rd party modded wood.
+Tetra tables in multiple wood variants, including 3rd-party modded wood.
