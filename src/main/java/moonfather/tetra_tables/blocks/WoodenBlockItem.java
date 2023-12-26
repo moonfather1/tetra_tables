@@ -18,9 +18,9 @@ public class WoodenBlockItem extends BlockItem
         this.burnTime = 900;
     }
 
-    public WoodenBlockItem(@NotNull Block block, CreativeModeTab tab)
+    public WoodenBlockItem(@NotNull Block block)
     {
-        super(block, new Item.Properties().tab(tab));
+        super(block, new Item.Properties());
         this.burnTime = 900;
     }
 

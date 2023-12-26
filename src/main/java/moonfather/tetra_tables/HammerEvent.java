@@ -1,7 +1,6 @@
 package moonfather.tetra_tables;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,28 +19,28 @@ public class HammerEvent
 {
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
     {
-        BlockState state = event. getWorld().getBlockState(event.getPos());
-        if (state.is(workbench) && ! event.getPlayer().isCrouching())
+        BlockState state = event. getLevel().getBlockState(event.getPos());
+        if (state.is(workbench) && ! event.getEntity().isCrouching())
         {
-            if (event.getHand().equals(InteractionHand.MAIN_HAND) && event.getPlayer().getMainHandItem().canPerformAction(TetraToolActions.hammer))
+            if (event.getHand().equals(InteractionHand.MAIN_HAND) && event.getEntity().getMainHandItem().canPerformAction(TetraToolActions.hammer))
             {
                 Block newTable = tryGetTable(state.getBlock());
                 if (newTable != null)
                 {
-                    event.getWorld().setBlockAndUpdate(event.getPos(), newTable.defaultBlockState());
-                    event.getWorld().playSound(event.getPlayer(), event.getPos(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.5F);
+                    event.getLevel().setBlockAndUpdate(event.getPos(), newTable.defaultBlockState());
+                    event.getLevel().playSound(event.getEntity(), event.getPos(), SoundEvents.WOOD_PLACE, SoundSource.BLOCKS, 1.0F, 0.5F);
                 }
                 else
                 {
-                    if (event.getWorld().isClientSide)
+                    if (event.getLevel().isClientSide)
                     {
                         if (ModList.get().isLoaded("everycomp"))
                         {
-                            event.getPlayer().displayClientMessage(tableNotFound2, true);
+                            event.getEntity().displayClientMessage(tableNotFound2, true);
                         }
                         else
                         {
-                            event.getPlayer().displayClientMessage(tableNotFound1, true);
+                            event.getEntity().displayClientMessage(tableNotFound1, true);
                         }
                     }
                 }
@@ -52,8 +51,8 @@ public class HammerEvent
         }
     }
     private static final TagKey<Block> workbench = BlockTags.create(new ResourceLocation("forge", "workbench"));;
-    private static final Component tableNotFound1 = new TranslatableComponent("message.tetra_tables.tableNotFound1");
-    private static final Component tableNotFound2 = new TranslatableComponent("message.tetra_tables.tableNotFound2");
+    private static final Component tableNotFound1 = Component.translatable("message.tetra_tables.tableNotFound1");
+    private static final Component tableNotFound2 = Component.translatable("message.tetra_tables.tableNotFound2");
 
     private static Block tryGetTable(Block block)
     {

@@ -5,7 +5,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -22,15 +21,14 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
@@ -49,7 +47,7 @@ public class TetraTable extends AbstractWorkbenchBlock
 
     public TetraTable()
     {
-        super(Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).strength(2f, 3f).sound(SoundType.WOOD));
+        super(Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2f, 3f).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
     }
 
     /////////////////////////
@@ -79,11 +77,7 @@ public class TetraTable extends AbstractWorkbenchBlock
         return SHAPE_TABLE;
     }
 
-    @Override
-    public PushReaction getPistonPushReaction(BlockState p_60584_)
-    {
-        return PushReaction.DESTROY;
-    }
+
 
     @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction)
@@ -121,11 +115,11 @@ public class TetraTable extends AbstractWorkbenchBlock
         BlockEntity te = level.getBlockEntity(pos);
         if (te instanceof TetraTableBlockEntity ttbe)
         {
-            NetworkHooks.openGui((ServerPlayer) player, ttbe, pos);
+            NetworkHooks.openScreen((ServerPlayer) player, ttbe, pos);
         }
         return InteractionResult.CONSUME;
     }
-    private final Component MessageInaccessible = new TranslatableComponent("message.tetra_tables.table_obscured");
+    private final Component MessageInaccessible = Component.translatable("message.tetra_tables.table_obscured");
 
 
     private boolean isObscured(Level level, BlockPos pos)
@@ -149,8 +143,9 @@ public class TetraTable extends AbstractWorkbenchBlock
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> list, TooltipFlag tooltipFlag)
     {
-        list.add(new TranslatableComponent("block.tetra.basic_workbench.description").withStyle(ChatFormatting.GRAY));
+        list.add(hoverText);
     }
+    private final Component hoverText = Component.translatable("block.tetra.basic_workbench.description").withStyle(ChatFormatting.GRAY);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -162,7 +157,7 @@ public class TetraTable extends AbstractWorkbenchBlock
             BlockEntity te = worldIn.getBlockEntity(pos);
             if (te instanceof WorkbenchTile)
             {
-                LazyOptional<IItemHandler> oih = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
+                LazyOptional<IItemHandler> oih = te.getCapability(ForgeCapabilities.ITEM_HANDLER);
                 oih.ifPresent(
                         ih -> {
                             for (int i = 0; i < ih.getSlots(); i++)

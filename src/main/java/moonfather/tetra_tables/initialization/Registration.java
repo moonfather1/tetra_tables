@@ -9,16 +9,16 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import se.mickelus.tetra.TetraItemGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Registration
 {
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MODID);
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
-    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, Constants.MODID);
+    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Constants.MODID);
 
     public static void init()
     {
@@ -29,9 +29,8 @@ public class Registration
 
     /////////////////////////////////////////////////
 
-    public static final List<RegistryObject<Block>> blocks_table3 = new ArrayList<>();
-    public static final List<RegistryObject<Item>> items_table3 = new ArrayList<>();
-    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "warped", "crimson" };
+    public static final List<Supplier<Block>> blocks_table3 = new ArrayList<>();
+    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "mangrove", "cherry", "warped", "crimson" };
 
     static
     {
@@ -40,7 +39,7 @@ public class Registration
         {
             RegistryObject<Block> block = BLOCKS.register("tetra_table_" + woodType, TetraTable::new);
             blocks_table3.add(block);
-            items_table3.add(FromBlock(block));
+            CreativeTabEvent.itemsToAdd.add(FromBlock(block));
         }
     }
 
@@ -48,10 +47,10 @@ public class Registration
 
     private static RegistryObject<Item> FromBlock(RegistryObject<Block> block)
     {
-        return ITEMS.register(block.getId().getPath(), () -> new WoodenBlockItem(block.get(), TetraItemGroup.instance));
+        return ITEMS.register(block.getId().getPath(), () -> new WoodenBlockItem(block.get()));
     }
 
-    private static Block[] ListToArray(List<RegistryObject<Block>> list) {
+    private static Block[] ListToArray(List<Supplier<Block>> list) {
         Block[] result = new Block[list.size()];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i).get();
