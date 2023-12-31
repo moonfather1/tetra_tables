@@ -21,7 +21,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -47,7 +48,7 @@ public class TetraTable extends AbstractWorkbenchBlock
 
     public TetraTable()
     {
-        super(Properties.of().mapColor(MapColor.COLOR_BROWN).strength(2f, 3f).sound(SoundType.WOOD).pushReaction(PushReaction.DESTROY));
+        super(Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).strength(2f, 3f).sound(SoundType.WOOD));
     }
 
     /////////////////////////
@@ -90,6 +91,9 @@ public class TetraTable extends AbstractWorkbenchBlock
     {
         return 20;
     }
+
+    @Override
+    public PushReaction getPistonPushReaction(BlockState p_60584_) { return PushReaction.DESTROY; }
 
     ///////////////////////////////////////////////////////////
 

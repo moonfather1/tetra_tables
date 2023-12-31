@@ -30,7 +30,7 @@ public class Registration
     /////////////////////////////////////////////////
 
     public static final List<Supplier<Block>> blocks_table3 = new ArrayList<>();
-    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "mangrove", "cherry", "warped", "crimson" };
+    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "mangrove", "warped", "crimson" };
 
     static
     {
@@ -39,7 +39,7 @@ public class Registration
         {
             RegistryObject<Block> block = BLOCKS.register("tetra_table_" + woodType, TetraTable::new);
             blocks_table3.add(block);
-            CreativeTabEvent.itemsToAdd.add(FromBlock(block));
+            FromBlock(block);
         }
     }
 

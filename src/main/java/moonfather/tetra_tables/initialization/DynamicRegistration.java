@@ -2,7 +2,7 @@ package moonfather.tetra_tables.initialization;
 
 import moonfather.tetra_tables.blocks.TetraTable;
 import moonfather.tetra_tables.blocks.WoodenBlockItem;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -17,7 +17,7 @@ public class DynamicRegistration
 {
     public static void registerBlocksForThirdPartyWood(RegisterEvent event)
     {
-        if (! event.getRegistryKey().equals(Registries.ITEM))  // Registries.BLOCK is too early
+        if (! event.getRegistryKey().equals(Registry.ITEM_REGISTRY))  // Registries.BLOCK is too early
         {
             return;
         }
@@ -51,7 +51,6 @@ public class DynamicRegistration
                         ForgeRegistries.BLOCKS.register("tetra_table_" + wood, block);
                         ForgeRegistries.ITEMS.register("tetra_table_" + wood, item);
                         Registration.blocks_table3.add(() -> block);
-                        CreativeTabEvent.itemsToAdd.add(() -> item);
                     }
                 }
             }
