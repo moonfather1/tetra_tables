@@ -176,7 +176,7 @@ dependencies {
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-	runtimeOnly fg.deobf("blank:workshop_for_handsome_adventurer--mc1.20.1-:1.14")
+	implementation fg.deobf("blank:workshop_for_handsome_adventurer--mc1.20.1-:1.14")
 	runtimeOnly fg.deobf("blank:jei-1.20.1-forge:15.2.0.27")
 	runtimeOnly fg.deobf("blank:VariantCraftingTables-1.20.1:2.0.2")
 	runtimeOnly fg.deobf("blank:MoreCraftingTables:5.1.1")
