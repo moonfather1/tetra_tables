@@ -29,11 +29,6 @@ public class DynamicRegistration
         try  // because of unfreeze fuckery
         {
             final String mc = "minecraft";
-            final String planks = "_planks";
-            final String slab = "_slab";
-            final String vertical = "vertical";
-            final String LOG1 = "stripped_";
-            final String LOG2 = "_log";
             boolean frozen = ((ForgeRegistry) ForgeRegistries.BLOCKS).isLocked();
             if (frozen) { ((ForgeRegistry) ForgeRegistries.BLOCKS).unfreeze(); }
 
@@ -41,13 +36,14 @@ public class DynamicRegistration
             {
                 if (DynamicWoodListAccessor.getHostMod(wood).equals(mc) && ForgeRegistries.BLOCKS.containsKey(new ResourceLocation(Constants.MODID, "tetra_table_" + wood)))
                 {
-                    return; // done manually, acacia for example
+                    continue; // done manually, acacia for example
                 }
                 Block block = new TetraTable();
                 Item item = new WoodenBlockItem(block);
                 ForgeRegistries.BLOCKS.register("tetra_table_" + wood, block);
                 ForgeRegistries.ITEMS.register("tetra_table_" + wood, item);
                 Registration.blocks_table3.add(() -> block);
+                CreativeTabEvent.itemsToAdd.add(() -> item);
             }
             if (frozen) { ((ForgeRegistry) ForgeRegistries.BLOCKS).freeze(); }
         }
