@@ -30,7 +30,7 @@ public class Registration
     /////////////////////////////////////////////////
 
     public static final List<Supplier<Block>> blocks_table3 = new ArrayList<>();
-    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "mangrove", "cherry", "warped", "crimson" };
+    public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "mangrove", "cherry", "bamboo", "warped", "crimson" };
 
     static
     {
