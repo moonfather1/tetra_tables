@@ -1,8 +1,0 @@
-{
-    "parent": "tetra_tables:block/tetra_table_template",
-    "textures": {
-        "particle": "minecraft:block/cherry_planks",
-        "oak_planks": "minecraft:block/cherry_planks",
-        "stripped_oak_log": "minecraft:block/stripped_cherry_log"
-    }
-}
