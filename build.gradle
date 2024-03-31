@@ -18,7 +18,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 
-version = '1.0'
+version = '1.0.2'
 group = 'moonfather.tetra_tables' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tetra_tables--mc1.18-'
 
@@ -48,7 +48,7 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1182')
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -73,7 +73,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1182')
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -93,7 +93,7 @@ minecraft {
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1182')
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -156,13 +156,13 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.2-40.2.4'
 
-    runtimeOnly fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:4744570")
 	implementation fg.deobf("curse.maven:tetra-289712:4029100")
 	runtimeOnly fg.deobf("curse.maven:mutil-351914:3788376")
 
     runtimeOnly fg.deobf("curse.maven:oh-the-biomes-youll-go-247560:4036050")
     runtimeOnly fg.deobf("curse.maven:terrablender-563928:3957976")
     //runtimeOnly fg.deobf("curse.maven:biomes-o-plenty-220318:3827434")
+	implementation fg.deobf("curse.maven:workshop-for-handsome-adventurer-875843:5043144")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

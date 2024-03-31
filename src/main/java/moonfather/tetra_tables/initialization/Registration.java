@@ -13,6 +13,7 @@ import se.mickelus.tetra.TetraItemGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class Registration
 {
@@ -29,8 +30,7 @@ public class Registration
 
     /////////////////////////////////////////////////
 
-    public static final List<RegistryObject<Block>> blocks_table3 = new ArrayList<>();
-    public static final List<RegistryObject<Item>> items_table3 = new ArrayList<>();
+    public static final List<Supplier<Block>> blocks_table3 = new ArrayList<>();
     public static final String[] woodTypes = { "oak", "spruce", "jungle", "birch", "dark_oak", "acacia", "warped", "crimson" };
 
     static
@@ -40,7 +40,7 @@ public class Registration
         {
             RegistryObject<Block> block = BLOCKS.register("tetra_table_" + woodType, TetraTable::new);
             blocks_table3.add(block);
-            items_table3.add(FromBlock(block));
+            FromBlock(block);
         }
     }
 
@@ -51,7 +51,7 @@ public class Registration
         return ITEMS.register(block.getId().getPath(), () -> new WoodenBlockItem(block.get(), TetraItemGroup.instance));
     }
 
-    private static Block[] ListToArray(List<RegistryObject<Block>> list) {
+    private static Block[] ListToArray(List<Supplier<Block>> list) {
         Block[] result = new Block[list.size()];
         for (int i = 0; i < list.size(); i++) {
             result[i] = list.get(i).get();

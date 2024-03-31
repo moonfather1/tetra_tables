@@ -149,8 +149,10 @@ public class TetraTable extends AbstractWorkbenchBlock
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable BlockGetter blockGetter, List<Component> list, TooltipFlag tooltipFlag)
     {
-        list.add(new TranslatableComponent("block.tetra.basic_workbench.description").withStyle(ChatFormatting.GRAY));
+        list.add(hoverText);
     }
+    private final Component hoverText = new TranslatableComponent("block.tetra.basic_workbench.description").withStyle(ChatFormatting.GRAY);
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////
 

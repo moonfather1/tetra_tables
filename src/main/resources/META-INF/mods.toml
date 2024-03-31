@@ -42,7 +42,7 @@ To obtain them, just whack a table with a hammer and get a nice looking workbenc
 [[dependencies.tetra_tables]]
     modId="workshop_for_handsome_adventurer"
     mandatory=false
-    versionRange="[1.08b, )"
+    versionRange="[1.14.7, )"
     ordering="NONE"
     side="BOTH"
 

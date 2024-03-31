@@ -1,7 +1,9 @@
 package moonfather.tetra_tables;
 
 import moonfather.tetra_tables.initialization.ClientSetup;
+import moonfather.tetra_tables.initialization.DynamicRegistration;
 import moonfather.tetra_tables.initialization.Registration;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
@@ -16,5 +18,6 @@ public class ModTetraTables
         Registration.init();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::RegisterRenderers));
         MinecraftForge.EVENT_BUS.addListener(HammerEvent::onRightClickBlock);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, DynamicRegistration::registerBlocksForThirdPartyWood);
     }
 }
