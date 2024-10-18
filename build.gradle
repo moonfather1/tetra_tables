@@ -63,7 +63,7 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1201')
 
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
@@ -88,7 +88,7 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1201')
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -107,7 +107,7 @@ minecraft {
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1201')
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -123,7 +123,7 @@ minecraft {
         }
 
         data {
-            workingDirectory project.file('../run')
+            workingDirectory project.file('../run1201')
 
             property 'forge.logging.markers', 'REGISTRIES'
 
@@ -171,6 +171,12 @@ dependencies {
 	
 	runtimeOnly fg.deobf("curse.maven:biomes-o-plenty-220318:4764804")
 	runtimeOnly fg.deobf("curse.maven:terrablender-563928:4647094")
+	
+	//runtimeOnly fg.deobf("curse.maven:biomes-o-plenty-220318:4617259")
+	runtimeOnly fg.deobf("curse.maven:ecologics-570463:4857272")
+	
+	 // Nice thing that shows the nbt in scrollable manner
+    runtimeOnly fg.deobf("curse.maven:item-nbt-viewer-514135:4578522")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

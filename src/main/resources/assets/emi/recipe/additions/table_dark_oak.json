@@ -1,0 +1,10 @@
+{
+  "type": "emi:world_interaction",
+  "left": "#item:forge:workbench",
+  "right": {
+    "type": "item",
+    "id": "tetra:modular_double",
+    "nbt": "{ \"double/handle\": \"double/basic_handle\", \"double/head_left\": \"double/basic_hammer_left\", \"double/head_right\": \"double/basic_hammer_right\", \"double/basic_hammer_right_material\": \"basic_hammer/stone\",\"double/basic_handle_material\": \"basic_handle/oak\", \"double/basic_hammer_left_material\": \"basic_hammer/stone\" }"
+  },
+  "output": "item:tetra_tables:tetra_table_dark_oak"
+}
