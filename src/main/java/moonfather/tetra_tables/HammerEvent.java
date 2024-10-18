@@ -19,6 +19,9 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 import se.mickelus.tetra.TetraToolActions;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class HammerEvent
 {
     private static final ResourceLocation WORKBENCH_ADVANCEMENT = new ResourceLocation("tetra", "upgrades/workbench");
@@ -68,43 +71,50 @@ public class HammerEvent
     private static final Component tableNotFound1 = new TranslatableComponent("message.tetra_tables.tableNotFound1");
     private static final Component tableNotFound2 = new TranslatableComponent("message.tetra_tables.tableNotFound2");
 
+    private static final Map<String, String[]> modPrefixes = new HashMap<>();
+
     private static Block tryGetTable(Block block)
     {
-        String id = ForgeRegistries.BLOCKS.getKey(block).getPath();
+        ResourceLocation fullId = ForgeRegistries.BLOCKS.getKey(block);
+        String id = fullId.getPath();
+        // first take care of EveryCompat prefixes
+        int slashPosition = id.lastIndexOf('/');
+        id = slashPosition < 0 ? id : id.substring(slashPosition + 1); // EveryCompat prefixes done
+        // then take care of vct prefixes  and mct prefixes
+        if (modPrefixes.isEmpty())		
+        {
+            modPrefixes.put("vct", new String[] {"bop", "eco", "sg", "rue", "quark", "hexerei", "ge", "ft", "bm", "aether", "ap"});
+            modPrefixes.put("mctb", new String[] {"bop", "ad", "ru"});
+        }
+        if (fullId.getNamespace().equals("vct") || fullId.getNamespace().equals("mctb"))
+        {
+            for (String prefix : modPrefixes.get(fullId.getNamespace()))
+            {
+                if (id.startsWith(prefix + "_"))
+                {
+                    id = id.substring(prefix.length() + 1);
+                    break;
+                }
+            }
+        } // VCT prefixes done. we'll recognize wood below.  MCT covered too.
         String wood = null;
-        int namePos = id.indexOf("simple_table_");
-        if (namePos >= 0)
+        int namePos = -1;
+        if ((namePos = id.indexOf("simple_table_")) >= 0)
         {
             wood = id.substring(namePos + 13);
         }
-        if (wood == null)
+        else if ((namePos = id.indexOf("_crafting_table")) >= 0)
         {
-            namePos = id.indexOf("_crafting_table");
-            if (namePos >= 0)
-            {
-                wood = id.substring(0, namePos);
-            }
+            wood = id.substring(0, namePos);
         }
-        if (wood == null)
+        else if (id.startsWith("crafting_table_"))
         {
-            if (id.startsWith("crafting_table_"))
-            {
-                wood = id.substring(15);
-            }
+            wood = id.substring(15);
         }
         if (wood == null)
         {
             return null;
         }
-
-//        String newName = "tetra_table_" + wood;
-//        for (ResourceLocation key: ForgeRegistries.BLOCKS.getKeys())
-//        {
-//            if (key.toString().endsWith(newName))
-//            {
-//                return ForgeRegistries.BLOCKS.getValue(key);
-//            }
-//        }             //EveryCompat
         ResourceLocation rl = new ResourceLocation(Constants.MODID, "tetra_table_" + wood);
         if (ForgeRegistries.BLOCKS.containsKey(rl))
         {
