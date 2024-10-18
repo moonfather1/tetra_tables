@@ -5,7 +5,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+'
 }
 
-version = '1.0.2'
+version = '1.2'
 group = 'moonfather.tetra_tables' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'tetra_tables--mc1.19.2-'
 
@@ -145,7 +145,8 @@ dependencies {
     runtimeOnly fg.deobf("blank:lib--blueprint-1.19.2:6.2.0")
     runtimeOnly fg.deobf("blank:lib--TerraBlender-forge-1.19.2:2.0.1.166")
     //////runtimeOnly fg.deobf("blank:maple-1.19.2:1.0.0-Forge-Beta1")
-    runtimeOnly fg.deobf("blank:MoreCraftingTablesForge:4.2.2")
+    runtimeOnly fg.deobf("blank:MoreCraftingTables:4.2.3")
+    runtimeOnly fg.deobf("blank:VariantCraftingTables-1.19.2:1.8.1")
     runtimeOnly fg.deobf("blank:Oh_The_Biomes_You'll_Go-forge-1.19.2:2.0.1.6")
     runtimeOnly fg.deobf("blank:upgrade_aquatic-1.19.2:5.1.0")
     implementation fg.deobf("blank:workshop_for_handsome_adventurer--mc1.19.2-:1.14")
